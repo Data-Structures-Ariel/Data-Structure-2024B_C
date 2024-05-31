@@ -2,7 +2,7 @@ package L04;
 
 import L03.BinNode;
 
-public class BST<E> {
+public class BST<E extends Comparable<E>> {
 
     private BinNode<E> root;
     private int size;
@@ -28,13 +28,13 @@ public class BST<E> {
         if (root == null)
             return true;
 
-//        if (root.getValue() > value) {
-//            add(root.getLeft(), value);
-//            root.setLeft((root.hasLeft()) ? root.getLeft() : new BinNode<>(value));
-//        } else {
-//            add(root.getRight(), value);
-//            root.setRight((root.hasRight()) ? root.getRight() : new BinNode<>(value));
-//        }
+        if (root.getValue().compareTo(value) >= 0) {
+            add(root.getLeft(), value);
+            root.setLeft((root.hasLeft()) ? root.getLeft() : new BinNode<>(value));
+        } else {
+            add(root.getRight(), value);
+            root.setRight((root.hasRight()) ? root.getRight() : new BinNode<>(value));
+        }
 
         return true;
     }
