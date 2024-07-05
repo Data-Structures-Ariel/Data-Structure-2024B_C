@@ -41,6 +41,11 @@ public class Mahat_Summer_2021A {
                     break;
                 case 7:
 
+                Memory memory = new Memory(576);
+                memory.firstFit(97);
+                memory.firstFit(142);
+                memory.print();
+
 
 
                     break;
@@ -125,6 +130,18 @@ class Memory {
         }
 
         return true;
+    }
+
+    public void print(){
+
+        Node<Data> temp = start;
+
+        while (temp != null) {
+            Data data = temp.getValue();
+            System.out.println("size -> "+data.getSize() +" isFree -> "+data.isFree());
+            temp = temp.getNext();
+        }
+
     }
 }
 
