@@ -1,5 +1,7 @@
 package L12;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -30,12 +32,44 @@ public class Mahat_Summer_2021A {
                 case 1:
                     break;
                 case 2:
+                    Queue<Integer> q= new LinkedList<>(){{
+                        add(2);
+                        add(5);
+                        add(5);
+                        add(7);
+                        add(2);
+                        add(4);
+                        add(1);
+                        add(3);
+                        add(2);
+                        add(5);
+                        add(5);
+                        add(1);
+                    }};
+                    System.out.println(q);
+                    Queue<Integer> filterQ=filterNumber(q);
+                    System.out.println(q);
+                    System.out.println(filterQ);
                     break;
                 case 3:
                     break;
                 case 4:
                     break;
                 case 5:
+                    A a = new A();
+                    B b = new B();
+                    A ab = new B();
+                    a.f();
+                    ab.f();
+                    b.f();
+                    a.g();
+                    ab.g();
+                    b.g();
+                    ((B)(ab)).superG();
+                    b.superG();
+
+//                    a.superG();
+                    ((B)a).superG();
                     break;
                 case 6:
                     break;
@@ -70,9 +104,60 @@ public class Mahat_Summer_2021A {
         }
     }
 
+    private static Queue<Integer> filterNumber(Queue<Integer> q) {
+        if(q==null)
+            return null;
+
+        Queue<Integer> filter = new LinkedList<>();
+        Queue<Integer> temp = new LinkedList<>();
+        int size=0;
+        while(!q.isEmpty()){
+            temp.add(q.poll());
+          size++;
+        }
+        while (!temp.isEmpty()){
+            int item = temp.poll();
+            int cnt=1;
+            size--;
+
+            for (int i = 0; i < size; i++) {
+                if(item==temp.peek())
+                {
+                    cnt++;
+                    temp.poll();
+                    size--;
+                }else
+                    temp.add(temp.poll());
+            }
+            if(cnt>2)
+                filter.add(item);
+        }
+        return filter;
+    }
+
 
 }
-
+class A{
+    public void f() {
+        System.out.println("A.f");
+    }
+    public void g() {
+        System.out.println(this);
+        f();
+    }
+}
+ class B extends A{
+    public void f(){
+        System.out.println("B.f");
+    }
+    public void g() {
+        System.out.println("B.g");
+    }
+    public void superG() {
+        System.out.println(super.toString());
+        super.g();
+    }
+}
 class Memory {
     private Node<Data> start;
 
