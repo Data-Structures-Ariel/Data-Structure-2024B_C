@@ -182,7 +182,7 @@ public class Mahat_Aviv_2023A {
                 min = nextMin;
             lst=lst.getNext();
         }
-
+return -1;
 
     }
 }
