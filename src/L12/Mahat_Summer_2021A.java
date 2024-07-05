@@ -79,9 +79,6 @@ public class Mahat_Summer_2021A {
                 memory.firstFit(97);
                 memory.firstFit(142);
                 memory.print();
-
-
-
                     break;
                 case 8:
                     break;
@@ -136,6 +133,136 @@ public class Mahat_Summer_2021A {
     }
 
 
+}
+class Tablet {
+    private String name;
+    private String kind;
+    private char system;
+    private double size;
+    private double price;
+
+    public Tablet(String name, String kind, char system, double size, double price) {
+        this.name = name;
+        this.kind = kind;
+        this.system = system;
+        this.size = size;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getKind() {
+        return kind;
+    }
+
+    public void setKind(String kind) {
+        this.kind = kind;
+    }
+
+    public char getSystem() {
+        return system;
+    }
+
+    public void setSystem(char system) {
+        this.system = system;
+    }
+
+    public double getSize() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public boolean isSame(Tablet other){
+        return this.name.equals(other.getName()) &&
+                this.kind.equals(other.getKind())&&
+                this.size==other.getSize();
+    }
+}
+
+ class Store {
+    private Tablet[] tablets;
+    private int[] systems;
+    public Store()
+    {
+        tablets = new Tablet[1000];
+        systems = new int[3];
+    }
+     public boolean addTablet(Tablet tab){
+
+        int index = systems[0]+systems[1]+systems[2];
+        if(index>=1000)
+            return false;
+
+         for (int i = 0; i < index; i++) {
+
+             if(tablets[i].isSame(tab)){
+                 tablets[i].setPrice(
+                         Math.max(tablets[i].getPrice()
+                 ,tab.getPrice()));
+                 return true;
+             }
+         }
+
+        tablets[index]=tab;
+         systems[(tab.getSystem()=='W')?0:(tab.getSystem()=='A')?1:2]++;
+//        if(tab.getSystem()=='W')
+//            systems[0]++;
+//        else if (tab.getSystem()=='A')
+//            systems[1]++;
+//        else
+//            systems[2]++;
+
+return true;
+     }
+     public int sortStore(){
+
+        Tablet[] windows = new Tablet[systems[0]];
+        Tablet[] android = new Tablet[systems[1]];
+        Tablet[] ios = new Tablet[systems[2]];
+         int index = systems[0]+systems[1]+systems[2];
+         int w=0,a=0,io=0;
+         for (int i = 0; i <index ; i++) {
+             if(tablets[i].getSystem()=='W')
+             {
+                 windows[w++]=tablets[i];
+             }
+             else if(tablets[i].getSystem()=='A'){
+                 android[a++]=tablets[i];
+             }
+             else
+                 ios[io++]=tablets[i];
+
+         }
+        // w= 10 , a=8, io=8
+         for (int i = 0; i < w; i++) {
+             tablets[i]=windows[i];
+         }
+         for (int i = 0; i < a; i++) {
+             tablets[w+i]=android[i];
+         }
+         for (int i = 0; i < io; i++) {
+             tablets[w+a+i]=ios[i];
+         }
+
+         return 1000-w-a-io;
+     }
 }
 class A{
     public void f() {
