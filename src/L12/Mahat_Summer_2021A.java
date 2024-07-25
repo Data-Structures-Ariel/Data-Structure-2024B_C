@@ -197,6 +197,7 @@ class Tablet {
 }
 
  class Store {
+
     private Tablet[] tablets;
     private int[] systems;
     public Store()
